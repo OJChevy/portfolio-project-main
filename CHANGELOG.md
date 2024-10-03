@@ -78,3 +78,19 @@ the following form: YYYY.0M.0D.
 - Designed a Google Firebase Firestore component
 - Designed a Shopping Cart component
 - Designed a Bank account component
+
+## [2024.10.03]
+
+### Added
+
+- Designed a proof of concept for the Bank Account component
+
+### Updated
+
+- Changed design to include the following:
+  - deposit() method
+  - withdraw() method
+  - createAccount() method
+  - accountExists() method
+  - main() method with example bank account use
+  - implemented a constructor for bank account
