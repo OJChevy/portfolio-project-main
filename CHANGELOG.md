@@ -94,3 +94,32 @@ the following form: YYYY.0M.0D.
   - accountExists() method
   - main() method with example bank account use
   - implemented a constructor for bank account
+
+## [2024.10.17]
+
+### Added
+
+Designed kernel and enhanced interfaces for the BankAccount component
+
+### Updated
+
+- Changed design to include the following:
+  - Created a diagram outlining the BankAccount component
+  - Renamed BankAccount.java to BankAccount1.java for implementation code
+  - An interface (BankAccountKernel.java) for the following kernel methods:
+    - createAccount()
+    - accountExists()
+    - deposit()
+    - withdraw()
+  - An enhanced interface (BankAccount.java) for the follwoing methods:
+    - addToBankStatement()
+    - depositMultiple()
+    - withdrawMultiple()
+    - transfer()
+    - pay()
+    - getBankStatement()
+    - Added an enumeration called AccountType that has the following enumerators:
+      - CHECKING
+      - SAVINGS
+      - NOTE: Will have to implement these into kernel methods to work properly
+    - Future thing to add is a 'holder' that holds the money when it is withdrawed

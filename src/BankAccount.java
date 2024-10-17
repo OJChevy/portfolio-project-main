@@ -1,123 +1,78 @@
-import components.map.Map1L;
+import java.util.Map;
 
 /**
- * Put a short phrase describing the program here.
- *
- * @author Put your name here
- *
+ * {@code BankAccountKernel} enhanced with secondary methods.
  */
-public final class BankAccount extends Map1L<String, Double> {
+public interface BankAccount extends BankAccountKernel {
 
-    private static Map1L<String, Double> overallAccount;
+    enum AccountType {
 
-    /*
-     * Kernel Methods ---------------------------------------------------------
-     */
+        CHECKING, SAVINGS
 
-    /**
-     * The purpose of this method is to create a new account within the overall
-     * account based on an account name.
-     *
-     * @param accountName
-     *            The name of the account
-     */
-    public void createAccount(String accountName) {
+    };
 
-        this.add(accountName, 0.00);
-
-    }
+    void addToBankStatement(Map<String, Double> info);
 
     /**
-     * The purpose of this method is to check if an account exists.
+     * The purpose of this method is to add several deposits to either the
+     * checking or savings account.
      *
-     * @param accountName
-     *            The name of the account
-     * @return true if the account with that name exists, false otherwise
+     * @param accountType
+     *            the account to add the money to.
+     *
+     * @param depositSlip
+     *            a {@code Map} with multiple deposits to add to the account.
      */
-    public final boolean accountExists(String accountName) {
-
-        boolean foundAccount = false;
-
-        if (this.hasKey(accountName)) {
-
-            foundAccount = true;
-
-        }
-
-        return foundAccount;
-
-    }
+    void depositMultiple(AccountType accountType,
+            Map<String, Double> depositSlip);
 
     /**
-     * The purpose of this method is to deposit an amount into a certain
-     * account.
+     * The purpose of this method is to withdraw several amounts from either the
+     * checking or savings account.
      *
-     * @param accountName
-     *            The name of the account
+     * @param accountType
+     *            the account to remove the money from
+     *
+     * @param withdrawSlip
+     *            a {@code Map} with the withdraw amounts
+     */
+    void withdrawMultiple(AccountType accountType,
+            Map<String, Double> withdrawSlip);
+
+    /**
+     * The purpose of this method is to transfer money from one account to
+     * another.
+     *
+     * @param transferAccount
+     *            the account to transfer money from
+     *
+     * @param receiveAccount
+     *            the account that will receive the money
+     *
      * @param amount
-     *            The amount to deposit
+     *            the amount of money that will be transferred
      */
-    public void deposit(String accountName, double amount) {
-
-        assert this
-                .hasKey(accountName) != false : "Violation of: Account exists";
-
-        if (this.hasKey(accountName)) {
-
-            double currentAmount = this.value(accountName);
-
-            double newAmount = currentAmount + amount;
-
-            this.replaceValue(accountName, newAmount);
-
-            System.out.println("Amount after deposit: " + newAmount);
-
-        }
-
-    }
-
-    private void createNewRep() {
-
-        this.overallAccount = new Map1L<String, Double>();
-
-    }
-
-    /*
-     * Constructor ------------------------------------------------------------
-     */
-
-    public BankAccount() {
-
-        this.createNewRep();
-
-    }
+    void transfer(AccountType transferAccount, AccountType receiveAccount,
+            double amount);
 
     /**
-     * The purpose of this method is to withdraw an amount from a certain
-     * account.
+     * The purpose of this method is to "withdraw" money and pay another party.
      *
-     * @param accountName
-     *            The name of the account
+     * @param accountType
+     *            the account to withdraw the money from
+     *
+     * @param receiver
+     *            the name of the party receiving the money
+     *
      * @param amount
-     *            The amount to withdraw
+     *            the amount of money that will be sent
      */
-    public final void withdraw(String accountName, double amount) {
+    void pay(AccountType accountType, String receiver, double amount);
 
-        assert this
-                .hasKey(accountName) != false : "Violation of: Account exists";
-
-        if (this.hasKey(accountName)) {
-
-            double currentAmount = this.value(accountName);
-
-            double newAmount = currentAmount - amount;
-
-            this.replaceValue(accountName, newAmount);
-
-            System.out.println("Amount after withdraw: " + newAmount);
-
-        }
-
-    }
+    /**
+     * The purpose of this method is to print the bank statement of the user's
+     * accounts to the terminal in a readable format.
+     */
+    void getBankStatement();
 
 }
